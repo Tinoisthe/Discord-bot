@@ -45,12 +45,12 @@ client.on('message', message => {
 
  if(command === 'ping'){
   client.commands.get('ping').execute(message, args);
+  
  } else if (command === 'cpu'){
-  client.commands.get('website').execute(message, args);
-    
-} else if (command === 'Web'){
-  client.commands.get('website').execute(message, args);
-    
+  client.commands.get('twitch').execute(message, args);
+  
+} else if (command === 'web'){
+  client.commands.get('Website').execute(message, args);
     
     }
   
