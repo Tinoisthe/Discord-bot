@@ -4,14 +4,14 @@
   "main": "discord.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node . main.js"
+    "start": ""
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Tinoisthe/Discord-bot"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tino",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Tinoisthe/Discord-bot-/issues"
