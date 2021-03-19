@@ -1,5 +1,5 @@
 
-worker: node . main.js
+worker: node . main
 $ heroku ps:scale web=1 worker=5
 heroku ps:scale web=1 worker=5
 
