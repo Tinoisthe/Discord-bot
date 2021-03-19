@@ -1,3 +1,3 @@
 
-worker: require './main.js'
+worker: main.js'
 
