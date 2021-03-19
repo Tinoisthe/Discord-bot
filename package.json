@@ -17,5 +17,8 @@
     "url": "https://github.com/Tinoisthe/Discord-bot-/issues"
   },
   "homepage": "https://github.com/Tinoisthe/Discord-bot-#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
