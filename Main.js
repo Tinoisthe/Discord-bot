@@ -58,4 +58,4 @@ client.on('message', message => {
    });
 
 
-client.login(config.json)
+client.login("NzkzNzM0OTg3NTEzODU2MDIw.X-wlTw.cOvH8HAQcB5U0mZldMmta6Kr53A")
