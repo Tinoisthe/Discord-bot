@@ -1,3 +1,3 @@
 
-worker:  node . 
+worker:  main.js
 
