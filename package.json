@@ -1,20 +1,20 @@
 {
-  "name": "tino-bot",
+  "name": "main",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "node . main.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node . main.js"
   },
   "repository": {
-      "type": "git",
-      "url": "https://github.com/Tinoisthe/Discord-bot"
+    "type": "git",
+    "url": "https://github.com/Tinoisthe/Discord-bot"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-      "url": "https://github.com/Tinoisthe/Discord-bot-/issues"
+    "url": "https://github.com/Tinoisthe/Discord-bot-/issues"
   },
   "homepage": "https://github.com/Tinoisthe/Discord-bot-#readme",
   "description": ""
