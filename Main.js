@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 const client = new Discord.Client();
 
- const prefix = '!';
+ const prefix = '>';
  
 
 const fs = require('fs');
@@ -20,7 +20,6 @@ const command = ('command');
 
 const commands = ('commands');
 
-client.listen(process.env.PORT);
 
 async  =>
   client.login(process.env.Discord_TOKEN);
@@ -46,6 +45,7 @@ const command = require(`./commands/${file}`);
 
 client.once('ready',() => {
     console.log('Tino is online!');
+    client.user.setActivity('Tino', { type: 'LISTENING'});
 });
 
 client.on('message', message => {
@@ -57,12 +57,20 @@ client.on('message', message => {
 
  if(command === 'ping'){
   client.commands.get('ping').execute(message, args);
-  
  } else if (command === 'cpu'){
   client.commands.get('twitch').execute(message, args);
-  
 } else if (command === 'web'){
   client.commands.get('Website').execute(message, args);
+
+} else if (command === 'clear'){
+  client.commands.get('clear').execute(message, args);
+
+
+} else if (command === 'kick'){
+  client.commands.get('kick').execute(message, args);
+
+} else if (command === 'ban'){
+  client.commands.get('ban').execute(message, args);
     
     }
   
