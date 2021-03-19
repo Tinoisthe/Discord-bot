@@ -5,6 +5,7 @@ const client = new Discord.Client();
  const prefix = '!';
 
 const fs = require('fs');
+const { config } = require('process');
 
 const command = ('command');
 
@@ -57,4 +58,4 @@ client.on('message', message => {
    });
 
 
-client.login('NzkzNzM0OTg3NTEzODU2MDIw.X-wlTw.rWcRUw7el73fptqSa334KJJh5rA')
+client.login(config.json)
