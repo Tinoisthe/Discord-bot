@@ -20,6 +20,8 @@ const command = ('command');
 
 const commands = ('commands');
 
+client.listen(process.env.PORT);
+
 async  =>
   client.login(process.env.Discord_TOKEN);
   client.commands = new Map();
