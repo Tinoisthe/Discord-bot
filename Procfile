@@ -1,3 +1,4 @@
 
-worker: node /app/main.js
+worker: 
+require('./app/main.js'
 
