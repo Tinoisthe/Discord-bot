@@ -3,16 +3,25 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
  const prefix = '!';
+ 
 
 const fs = require('fs');
-const { config } = require('process');
+const { env } = require('process');
+require('dotenv-flow').config();
+
+const config = {
+ token: process.env.TOKEN,
+ owner: process.env.OWNER,
+ prefix: process.env.PREFIX
+
+};
 
 const command = ('command');
 
 const commands = ('commands');
 
 async  =>
-  client.login(process.env.BOT_TOKEN);
+  client.login(process.env.Discord_TOKEN);
   client.commands = new Map();
   client.cachedmessagereactions = new Map();
 
@@ -57,5 +66,4 @@ client.on('message', message => {
   
    });
 
-
-client.login("NzkzNzM0OTg3NTEzODU2MDIw.X-wlTw.cOvH8HAQcB5U0mZldMmta6Kr53A")
+client.login(config.token)
