@@ -1,4 +1,3 @@
 
-worker: 
-require('./app/main.js'
+worker: require './app/main.js'
 
