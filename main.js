@@ -1,5 +1,5 @@
 const { error } = require('console');
-//const Discord = require('discord.js');
+const Discord = require('discord.js');
 const { on } = require('events');
 
 const client = new Discord.Client();
