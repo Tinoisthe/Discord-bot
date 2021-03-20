@@ -1,3 +1,4 @@
+const { error } = require('console');
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
@@ -47,7 +48,7 @@ const command = require(`./commands/${file}`);
 client.once('ready',() => {
     console.log('Tino is online!');
     client.user.setActivity('Tino', { type: 'WATCHING'});
-  
+  console.log(error);
 });
 
 client.on('message', message => {

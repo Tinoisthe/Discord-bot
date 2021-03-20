@@ -19,10 +19,12 @@
   "homepage": "https://github.com/Tinoisthe/Discord-bot-#readme",
   "description": "",
   "dependencies": {
+    "@discordjs/opus": "^0.5.0",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "dotenv-flow": "^3.2.0",
     "express": "^4.17.1",
+    "opusscript": "^0.0.8",
     "react-scripts": "^4.0.3",
     "yt-search": "^2.7.4",
     "ytdl-core": "^4.5.0"
