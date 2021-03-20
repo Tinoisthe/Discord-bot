@@ -72,6 +72,8 @@ client.on('message', message => {
   client.commands.get('ban').execute(message, args);
 } else if (command === 'tino'){
   client.commands.get('tino').execute(message, args);
+} else if (command === '!'){
+  client.commands.get('you').execute(message, args);
     }
   
    });
