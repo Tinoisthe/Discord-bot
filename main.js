@@ -13,7 +13,7 @@ const { type } = require('os');
 const { env } = require('process');
 require('dotenv-flow').config();
 
-const config = {
+const config = { 
  token: process.env.TOKEN,
  owner: process.env.OWNER,
  prefix: process.env.PREFIX
