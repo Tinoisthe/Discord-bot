@@ -1,5 +1,6 @@
 const { error } = require('console');
 const Discord = require('discord.js');
+const { on } = require('events');
 
 const client = new Discord.Client();
 
@@ -8,6 +9,7 @@ const client = new Discord.Client();
  
 
 const fs = require('fs');
+const { type } = require('os');
 const { env } = require('process');
 require('dotenv-flow').config();
 
@@ -48,7 +50,6 @@ const command = require(`./commands/${file}`);
 client.once('ready',() => {
     console.log('Tino is online!');
     client.user.setActivity('Tino', { type: 'WATCHING'});
-  console.log(error);
 });
 
 client.on('message', message => {
