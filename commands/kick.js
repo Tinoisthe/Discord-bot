@@ -4,7 +4,7 @@ module.exports = {
  execute(message, args){
         const member = message.mentions.users.first();
           if(member){
-            if(message.member.roles.cache.has('<@701021515524866118>')){
+            if(message.member.roles.cache.has('<@822786751390154782>')){
                
              const memberTarger = message.guild.members.cache.get(member.id)
              memberTarger.kick();

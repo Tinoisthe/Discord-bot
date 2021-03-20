@@ -4,7 +4,7 @@ module.exports = {
      execute(message, args){
 
 
-      if(message.member.roles.cache.has('<@&821684502585016330>')){
+      if(message.member.roles.cache.has('<@412011486953865227>')){
        message.channel.send('pong!')
        } else {
              message.channel.send("you can't send this Because you don't have the Authorisation ");
