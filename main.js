@@ -58,27 +58,20 @@ client.on('message', message => {
  const args = message.content.slice(prefix.length).split(/ +/);
  const command = args.shift().toLowerCase();
  
-
  if(command === 'ping'){
   client.commands.get('ping').execute(message, args);
  } else if (command === 'cpu'){
   client.commands.get('twitch').execute(message, args);
 } else if (command === 'web'){
   client.commands.get('Website').execute(message, args);
-
 } else if (command === 'clear'){
   client.commands.get('clear').execute(message, args);
-
-
 } else if (command === 'kick'){
   client.commands.get('kick').execute(message, args);
-
 } else if (command === 'ban'){
   client.commands.get('ban').execute(message, args);
-
 } else if (command === 'tino'){
   client.commands.get('tino').execute(message, args);
-
     }
   
    });
