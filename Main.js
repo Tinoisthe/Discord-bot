@@ -4,6 +4,7 @@ const client = new Discord.Client();
 
  const prefix = '!';
  
+ 
 
 const fs = require('fs');
 const { env } = require('process');
@@ -45,7 +46,8 @@ const command = require(`./commands/${file}`);
 
 client.once('ready',() => {
     console.log('Tino is online!');
-    client.user.setActivity('Tino', { type: 'LISTENING'});
+    client.user.setActivity('Tino', { type: 'WATCHING'});
+  
 });
 
 client.on('message', message => {
@@ -71,7 +73,10 @@ client.on('message', message => {
 
 } else if (command === 'ban'){
   client.commands.get('ban').execute(message, args);
-    
+
+} else if (command === 'tino'){
+  client.commands.get('tino').execute(message, args);
+
     }
   
    });
