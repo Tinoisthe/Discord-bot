@@ -49,7 +49,7 @@ const command = require(`./commands/${file}`);
 
 client.once('ready',() => {
     console.log('Tino is online!');
-    client.user.setActivity('Tino', { type: 'WATCHING'});
+    client.user.setActivity('Donate2Snail', { type: 'WATCHING'});
 });
 
 client.on('message', message => {
