@@ -9,7 +9,7 @@ module.exports = {
        message.channel.send('pong!')
        } else {
              message.channel.send("you can't send this Because you don't have the Authorisation ");
-             
+//
        }
   
  }
