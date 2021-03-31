@@ -10,7 +10,5 @@ module.exports = {
        } else {
              message.channel.send("you can't send this Because you don't have the Authorisation ");
        }
-  
- }
- 
+   }
 }
