@@ -20,8 +20,6 @@ const config = {
 
 };
 
-const command = ('command');
-
 const commands = ('commands');
 
 
