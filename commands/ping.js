@@ -4,7 +4,7 @@ module.exports = {
      execute(message, args){
 
 
-      if(message.member.roles.cache.has('<@412011486953865227>')){
+      if(message.member.roles.cache.has('680601145533923368')){
            
        message.channel.send('pong!')
        } else {
