@@ -4,7 +4,7 @@ const { on } = require('events');
 
 const client = new Discord.Client();
 
- const prefix = '!';
+ const prefix = '>';
  
  
 
@@ -72,6 +72,8 @@ client.on('message', message => {
   client.commands.get('tino').execute(message, args);
 } else if (command === '!'){
   client.commands.get('you').execute(message, args);
+} else if (command === 'help'){
+  client.commands.get('help').execute(message, args);
     }
   
    });
