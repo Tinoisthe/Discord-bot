@@ -72,8 +72,10 @@ client.on('message', message => {
   client.commands.get('tino').execute(message, args);
 } else if (command === '!'){
   client.commands.get('you').execute(message, args);
-} else if (command === 'help'){
+} else if (command === ''){
   client.commands.get('help').execute(message, args);
+} else if (command === 'admin'){
+  client.commands.get('admin').execute(message, args);
     }
   
    });
