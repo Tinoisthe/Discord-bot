@@ -1,16 +1,20 @@
-const { error } = require('console');
+const { error, time } = require('console');
 const Discord = require('discord.js');
 const { on } = require('events');
-
 const client = new Discord.Client();
 
- const prefix = '>';
+ const prefix = ('>','');
  
+
  
 
 const fs = require('fs');
+const { url } = require('inspector');
+const { Error } = require('opusscript');
 const { type } = require('os');
-const { env } = require('process');
+const { env, send, off } = require('process');
+const hello = require('./commands/hello');
+const tino = require('./commands/tino');
 require('dotenv-flow').config();
 
 const config = { 
@@ -46,8 +50,11 @@ const command = require(`./commands/${file}`);
 
 
 client.once('ready',() => {
-    console.log('Tino is online!');
+    console.log('Tino is online!')
+    console.log(Error);
     client.user.setActivity('Donate2Snail', { type: 'WATCHING'});
+   client.user.setUsername('Tino');
+   client.user.setStatus('invisible')
 });
 
 client.on('message', message => {
@@ -72,10 +79,14 @@ client.on('message', message => {
   client.commands.get('tino').execute(message, args);
 } else if (command === '!'){
   client.commands.get('you').execute(message, args);
-} else if (command === ''){
+} else if (command === 'help'){
   client.commands.get('help').execute(message, args);
 } else if (command === 'admin'){
   client.commands.get('admin').execute(message, args);
+} else if (command === 'hi'){
+  client.commands.get('hello').execute(message, args);
+} else if (command === 'no'){
+  client.commands.get('no').execute(message, args);
     }
   
    });
