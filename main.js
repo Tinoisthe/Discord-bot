@@ -88,6 +88,8 @@ client.on('message', message => {
   client.commands.get('hello').execute(message, args);
 } else if (command === 'no'){
   client.commands.get('no').execute(message, args);
+} else if (command === 'link'){
+  client.commands.get('link').execute(message, args);
     }
   
    });
