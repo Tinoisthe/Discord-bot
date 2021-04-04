@@ -54,7 +54,8 @@ client.once('ready',() => {
     console.log(Error);
     client.user.setActivity('Donate2Snail', { type: 'WATCHING'});
    client.user.setUsername('Tino');
-   client.user.setStatus('invisible')
+   client.user.setStatus('online')
+   client.user.setStatus('idle')
 });
 
 client.on('message', message => {
