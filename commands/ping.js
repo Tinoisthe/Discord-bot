@@ -7,7 +7,7 @@ module.exports = {
       
            
        message.channel.send('pong!')
-       message.channel.send('watching you @631862160393502745')
+       
        
    }
 }
