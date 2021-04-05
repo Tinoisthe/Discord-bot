@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const { on } = require('events');
 const client = new Discord.Client();
 
- const prefix = ('>','');
+ const prefix = '>';
  
 
  
@@ -13,8 +13,6 @@ const { url } = require('inspector');
 const { Error } = require('opusscript');
 const { type } = require('os');
 const { env, send, off } = require('process');
-const hello = require('./commands/hello');
-const tino = require('./commands/tino');
 require('dotenv-flow').config();
 
 const config = { 
@@ -51,11 +49,7 @@ const command = require(`./commands/${file}`);
 
 client.once('ready',() => {
     console.log('Tino is online!')
-    console.log(Error);
-    client.user.setActivity('Donate2Snail', { type: 'WATCHING'});
-   client.user.setUsername('Tino');
-   client.user.setStatus('online')
-   client.user.setStatus('idle')
+    client.user.setActivity('Donate2Snail', { type: 'STREAMING'});
 });
 
 client.on('message', message => {
@@ -68,8 +62,6 @@ client.on('message', message => {
   client.commands.get('ping').execute(message, args);
  } else if (command === 'cpu'){
   client.commands.get('twitch').execute(message, args);
-} else if (command === 'web'){
-  client.commands.get('Website').execute(message, args);
 } else if (command === 'clear'){
   client.commands.get('clear').execute(message, args);
 } else if (command === 'kick'){
@@ -78,16 +70,12 @@ client.on('message', message => {
   client.commands.get('ban').execute(message, args);
 } else if (command === 'tino'){
   client.commands.get('tino').execute(message, args);
-} else if (command === '!'){
-  client.commands.get('you').execute(message, args);
 } else if (command === 'help'){
   client.commands.get('help').execute(message, args);
 } else if (command === 'admin'){
   client.commands.get('admin').execute(message, args);
 } else if (command === 'hi'){
   client.commands.get('hello').execute(message, args);
-} else if (command === 'no'){
-  client.commands.get('no').execute(message, args);
 } else if (command === 'link'){
   client.commands.get('link').execute(message, args);
     }

@@ -5,6 +5,7 @@ module.exports = {
          const member = message.mentions.users.first();
            if(member){
             if(message.member.roles.cache.has('786222065304338440')){
+              if(message.member.roles.cache.has('786517329981866015')){
               const memberTarger = message.guild.members.cache.get(member.id)
               memberTarger.ban();
               message.channel.send("User has been ban");
@@ -19,5 +20,5 @@ module.exports = {
  
   }
 }
- 
+}
  
