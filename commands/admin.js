@@ -16,6 +16,8 @@ module.exports = {
                 message.channel.send(">kick command");
                 message.channel.send(">ban command");
             }else{
+                message.channel.send('You cant use that');
+          
                 if(message.member.roles.cache.has('786517329981866015')){
                 message.channel.send(">kick command");
                 message.channel.send(">ban command");
