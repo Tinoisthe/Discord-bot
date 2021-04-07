@@ -4,12 +4,11 @@ const { on } = require('events');
 const client = new Discord.Client();
 
  const prefix = '>';
- 
+
 
  
 
 const fs = require('fs');
-const { url } = require('inspector');
 const { Error } = require('opusscript');
 const { type } = require('os');
 const { env, send, off } = require('process');
@@ -50,6 +49,8 @@ const command = require(`./commands/${file}`);
 client.once('ready',() => {
     console.log('Tino is online!')
     client.user.setActivity('Donate2Snail', { type: 'STREAMING'});
+    client.user.setPresence('Watching Anime');
+ 
 });
 
 client.on('message', message => {
