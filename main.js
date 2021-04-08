@@ -48,9 +48,7 @@ const command = require(`./commands/${file}`);
 
 client.once('ready',() => {
     console.log('Tino is online!')
-    client.user.setActivity('Donate2Snail', { type: 'STREAMING'});
-    client.user.setPresence('Watching Anime');
- 
+    client.user.setActivity('Donate2Snail', { type: 'WATCHING'});
 });
 
 client.on('message', message => {
