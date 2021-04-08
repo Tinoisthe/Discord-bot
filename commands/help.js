@@ -4,13 +4,16 @@ name: 'help',
   description: "this command help a member!",
   execute(message, args){
     
-         ///     message.channel.send("!ban you need Admin");
+         ///     message.channel.send("!ban you need Admin"); 
             //  message.channel.send("!kick you need Admin");
-            message.channel.send('Hello this is Helper Bot.')
-              message.channel.send(">clear [add number]");
-              message.channel.send(">ping and pong");
-              message.channel.send(">tino")
-              message.channel.send(">admin for commands");
+            message.channel.send('Hello this is Helper Bot My prefix is > .')
+              message.channel.send("clear [add number]");
+              message.channel.send("ping");
+              message.channel.send("tino")
+              message.channel.send("admin");
+              message.channel.send("links");
+              message.channel.send("errors");
+              message.channel.send('im am a AI Bot made by Tino'); 
         
  
                      

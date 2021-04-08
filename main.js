@@ -75,10 +75,10 @@ client.on('message', message => {
   client.commands.get('help').execute(message, args);
 } else if (command === 'admin'){
   client.commands.get('admin').execute(message, args);
-} else if (command === 'hi'){
-  client.commands.get('hello').execute(message, args);
 } else if (command === 'link'){
   client.commands.get('link').execute(message, args);
+} else if (command === 'errors'){
+  client.commands.get('errors').execute(message, args);
     }
   
    });
