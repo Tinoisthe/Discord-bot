@@ -1,8 +1,9 @@
+
 module.exports = {
     name: 'newEmbed',
     description: "newEmbed",
-    execute(message, args, Dicsord){
-const newEmbed = new Discord.MessageEmbed()
+     execute(message, args, Discord){
+const newembed = new Discord.MessageEmbed()
 .setColor('#0099ff')
 .setTitle('Tino')
 .setURL('kickassanime.rs')
@@ -18,7 +19,7 @@ const newEmbed = new Discord.MessageEmbed()
 .addField('Inline field title', 'Some value here', true)
 .setImage('https://i.imgur.com/wSTFkRM.png')
 .setFooter('look at rules', 'https://i.imgur.com/wSTFkRM.png');
-message.channel.send(newEmbed);
+message.channel.send(newembed);
 
 
 }

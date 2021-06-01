@@ -1,7 +1,7 @@
 module.exports = {
     name: 'clear',
     description: "Clear messages!",
-   async  execute(message, args) {
+   async execute(message, args) {
     
         if (!args[0]) return message.reply("Please enter the amount of messages to clear!");
  

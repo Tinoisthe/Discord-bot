@@ -153,7 +153,7 @@ client.on('message', message => {
 } else if (command === 'errors'){
   client.commands.get('errors').execute(message, args);
 } else if (command === 'new'){
-  client.commands.get('newEmbed').execute(message, args, Discord);
+  client.commands.get('newembed').execute(message, args, Discord);
 } else if (message.content === `${prefix}server`) {
   message.channel.send(`This server's name is: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 } else if (message.content === `${prefix}user`) {
