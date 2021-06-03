@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { error, time } = require('console');
 const { on } = require('events');
 const client = new Discord.Client();
-const guildID = '714993825239531621';
+const guildID = '849581521828315146';
 const token = '';
 
  const prefix = '>';
@@ -42,8 +42,6 @@ client.on('message', async message => {
     if (message.channel.type != 'dm') {
         message.delete();
         
-      
-    
 
        let appChannel = (await message.author.send("Please fill all the details if you don't want to continue then type cancel")).channel
        
@@ -118,7 +116,8 @@ const command = require(`./commands/${file}`);
 }
 
    });
-
+const cmd = client.commands.get('report');
+console.log(cmd);
 
 
 client.once('ready',() => {
@@ -152,8 +151,6 @@ client.on('message', message => {
   client.commands.get('link').execute(message, args);
 } else if (command === 'errors'){
   client.commands.get('errors').execute(message, args);
-} else if (command === 'new'){
-  client.commands.get('newembed').execute(message, args, Discord);
 } else if (message.content === `${prefix}server`) {
   message.channel.send(`This server's name is: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 } else if (message.content === `${prefix}user`) {
