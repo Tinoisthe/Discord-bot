@@ -19,7 +19,7 @@ const newembed = new Discord.MessageEmbed()
 .addField('Inline field title', 'Some value here', true)
 .setImage('https://i.imgur.com/wSTFkRM.png')
 .setFooter('look at rules', 'https://i.imgur.com/wSTFkRM.png');
-message.channel.send(newembed);
+message.channel.send();
 
 
 }

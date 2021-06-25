@@ -4,13 +4,11 @@ const { on } = require('events');
 const client = new Discord.Client();
 const guildID = '849581521828315146';
 const token = '';
-
  const prefix = '>';
 const fs = require('fs');
 const { Error } = require('opusscript');
 const { type } = require('os');
 const { env, send, off } = require('process');
-const bot = require('./commands/newEmbed');
 require('dotenv-flow').config();
 
 const config = { 
@@ -33,7 +31,14 @@ client.on('message', async message => {
   //args
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
-  
+  client.commands = new Discord.Collection();
+
+const commandfiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+for(const file of commandfiles){
+const command = require(`./commands/${file}`);
+
+  client.commands.set(command.name, command);
+}
   
 
   //commands
@@ -100,18 +105,11 @@ client.on('message', async message => {
         
         return;
       }
-  client.commands = new Discord.Collection();
-
-const commandfiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-for(const file of commandfiles){
-const command = require(`./commands/${file}`);
-
-  client.commands.set(command.name, command);
+  
 
 }
       
 
-}
 
 }
 
@@ -155,6 +153,7 @@ client.on('message', message => {
   message.channel.send(`This server's name is: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 } else if (message.content === `${prefix}user`) {
   message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+
 
 }
 
