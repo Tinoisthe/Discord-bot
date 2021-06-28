@@ -13,7 +13,6 @@ name: 'help',
               message.channel.send("admin");
               message.channel.send("links");
               message.channel.send("errors");
-              message.channel.send('im am a AI Bot made by Tino'); 
         
  
                      

@@ -12,6 +12,7 @@ module.exports = {
             message.channel.send('You cant use that so i will send this');
             message.channel.send("HI");
         }else{
+            
             if(message.member.roles.cache.has('737989008218652733')){
                 message.channel.send(">kick command");
                 message.channel.send(">ban command");
