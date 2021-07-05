@@ -2,7 +2,6 @@ module.exports = {
     name: 'clear',
     description: "Clear messages!",
    async execute(message, args) {
-    
         if (!args[0]) return message.reply("Please enter the amount of messages to clear!");
  
         if(isNaN(args[0])) return message.reply("Please type a real number!");
@@ -13,9 +12,15 @@ module.exports = {
  
         await message.channel.messages.fetch({ limit: args[0]}).then(messages =>{
             message.channel.bulkDelete(messages)
-            message.channel.send("Done")
-            message.delete();
+            message.reply('Done.')
+  .then(msg => {
+    setTimeout(() => msg.delete(), 100)
+  })
+  .catch(/*Your Error handling if the Message isn't returned, sent, etc.*/);
+  
     });
+
  
  }
+}
 }   
