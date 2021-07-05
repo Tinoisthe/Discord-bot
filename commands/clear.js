@@ -2,6 +2,10 @@ module.exports = {
     name: 'clear',
     description: "Clear messages!",
    async execute(message, args) {
+    if(message.member.roles.cache.has('688214236765356044')){
+    }else if (message.member.roles.cache.has('694569352502181899')){ 
+    
+    
         if (!args[0]) return message.reply("Please enter the amount of messages to clear!");
  
         if(isNaN(args[0])) return message.reply("Please type a real number!");
@@ -13,14 +17,16 @@ module.exports = {
         await message.channel.messages.fetch({ limit: args[0]}).then(messages =>{
             message.channel.bulkDelete(messages)
             message.reply('Done.')
+            
   .then(msg => {
-    setTimeout(() => msg.delete(), 100)
+    setTimeout(() => msg.delete(), 1000)
   })
   .catch(/*Your Error handling if the Message isn't returned, sent, etc.*/);
-  
+ 
     });
-
+}else{ 
+    message.reply('You cant use that')
  
  }
 }
-}   
+}

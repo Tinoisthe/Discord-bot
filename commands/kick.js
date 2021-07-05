@@ -4,13 +4,14 @@ module.exports = {
  execute(message, args){
         const member = message.mentions.users.first();
           if(member){
-            if(message.member.roles.cache.has('737989008218652733')){
+            if(message.member.roles.cache.has('688214236765356044')){
+            }else if (message.member.roles.cache.has('686625920861339685')){ 
                
              const memberTarger = message.guild.members.cache.get(member.id)
              memberTarger.kick();
              message.channel.send("User has been kicked");
-          }else{
-                message.channel.send('You cant kick that member');
+            }else{ 
+              message.reply('You cant use that')
 
                     
                    

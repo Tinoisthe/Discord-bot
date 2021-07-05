@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const { error, time } = require('console');
 const { on } = require('events');
 const client = new Discord.Client();
 const guildID = '849581521828315146';
@@ -131,24 +130,26 @@ client.on('message', message => {
  
  if(command === 'ping'){
   client.commands.get('ping').execute(message, args);
- } else if (command === 'cpu'){
-  client.commands.get('twitch').execute(message, args);
+ } else if (command === 'help'){
+  client.commands.get('help').execute(message, args, Discord);
 } else if (command === 'clear'){
   client.commands.get('clear').execute(message, args);
 } else if (command === 'kick'){
   client.commands.get('kick').execute(message, args);
 } else if (command === 'ban'){
   client.commands.get('ban').execute(message, args);
+} else if (command === 't'){
+  client.commands.get('t').execute(message, args);
 } else if (command === 'tino'){
   client.commands.get('tino').execute(message, args);
-} else if (command === 'help'){
-  client.commands.get('help').execute(message, args);
 } else if (command === 'admin'){
   client.commands.get('admin').execute(message, args);
 } else if (command === 'link'){
   client.commands.get('link').execute(message, args);
-} else if (command === 'errors'){
-  client.commands.get('errors').execute(message, args);
+} else if (command === 'mute'){
+  client.commands.get('mute').execute(message, args);
+} else if (command === 'unmute'){
+  client.commands.get('unmute').execute(message, args);
 } else if (message.content === `${prefix}server`) {
   message.channel.send(`This server's name is: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 } else if (message.content === `${prefix}user`) {
