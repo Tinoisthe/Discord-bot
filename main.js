@@ -119,7 +119,7 @@ console.log(cmd);
 
 client.once('ready',() => {
     console.log('Tino is online!')
-    client.user.setActivity('Anime', { type: 'WATCHING'});
+    client.user.setActivity('over 100 servers', { type: 'WATCHING'});
 });
 
 client.on('message', message => {
