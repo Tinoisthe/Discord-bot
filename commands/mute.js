@@ -4,7 +4,8 @@ module.exports = {
     description: "This mutes a member",
     execute(message, args) {
         if(message.member.roles.cache.has('688214236765356044')){
-        }else if (message.member.roles.cache.has('694569352502181899')){ 
+        }else if (message.member.roles.cache.has('686625920861339685')){ 
+        }else if (message.member.roles.cache.has('795932192986365972')){ 
        
              
         const target = message.mentions.users.first();

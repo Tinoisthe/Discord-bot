@@ -10,6 +10,8 @@ module.exports = {
                console.log
                 message.channel.send(">kick command");
                 message.channel.send(">ban command");
+                message.channel.send(">mute command");
+                message.channel.send(">unmute command");
                 }else{ 
                     message.reply('You cant use that')
             }

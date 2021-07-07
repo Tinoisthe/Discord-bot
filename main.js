@@ -138,8 +138,6 @@ client.on('message', message => {
   client.commands.get('kick').execute(message, args);
 } else if (command === 'ban'){
   client.commands.get('ban').execute(message, args);
-} else if (command === 't'){
-  client.commands.get('t').execute(message, args);
 } else if (command === 'tino'){
   client.commands.get('tino').execute(message, args);
 } else if (command === 'admin'){
