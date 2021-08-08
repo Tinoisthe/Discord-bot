@@ -131,7 +131,7 @@ client.on('message', message => {
  if(command === 'ping'){
   client.commands.get('ping').execute(message, args);
  } else if (command === 'help'){
-  client.commands.get('help').execute(message, args, Discord);
+  client.commands.get('help').execute(message, args);
 } else if (command === 'clear'){
   client.commands.get('clear').execute(message, args);
 } else if (command === 'kick'){
