@@ -8,6 +8,9 @@ const config = {
   
  
  };
+ client.once('ready', () => {
+  client.user.setActivity('kaalinks.xyz', { type: "WATCHING"});
+});
  client.on('guildMemberAdd', guildMember =>{
   let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === '871276957822763059');
 
