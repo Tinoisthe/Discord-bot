@@ -6,6 +6,7 @@ module.exports = {
         if(message.member.roles.cache.has('688214236765356044')){
         }else if (message.member.roles.cache.has('686625920861339685')){ 
         }else if (message.member.roles.cache.has('795932192986365972')){ 
+        }else if (message.member.roles.cache.has('871298883379142666')){
         const target = message.mentions.users.first();    
         if(target){
 
