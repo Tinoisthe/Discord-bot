@@ -23,7 +23,7 @@ const newEmbed = new Discord.MessageEmbed()
     {name: 'Rule 14', value: 'The use of self bots is prohibited.'},
     {name: 'Rule 15', value: ' Do not impersonate staff.'},
 )
-.setImage('https://pbs.twimg.com/media/EcVnwmhWAAAgekx?format=jpg&name=large')
+.setImage('https://images-ext-1.discordapp.net/external/-MVhgR0pYG4oS4Hh_es7-pARahzCNki0VPjf3xnakYE/%3Fformat%3Djpg%26name%3Dmedium/https/pbs.twimg.com/media/EcVoipsXQAUiP_N?width=397&height=472')
 .setFooter('make sure to read Rules')
 message.channel.send(newEmbed);
     }
