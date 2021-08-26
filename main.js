@@ -12,10 +12,10 @@ const config = {
   client.user.setActivity('kaalinks.xyz', { type: "WATCHING"});
 });
  client.on('guildMemberAdd', guildMember =>{
-  let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === '871276957822763059');
+  let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === '880396361168732201');
 
   guildMember.roles.add(welcomeRole);
-  guildMember.guild.channels.cache.get('871275856197189654').send(`Welcome <@${guildMember.user.id}> to our server! Make sure to check out the rules channel!`)
+  guildMember.guild.channels.cache.get('880357822062288926').send(`Welcome <@${guildMember.user.id}> to our server! Make sure to check out the rules channel!`)
 });
 
   client.commands = new Discord.Collection();

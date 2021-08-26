@@ -2,7 +2,7 @@ module.exports = {
     name: 'clear',
     description: "Clear messages!",
     async execute( client, message, args , Discord){
-    if(message.member.roles.cache.has('871298883379142666')){
+    if(message.member.roles.cache.has('880362875674308648')){
         if (!args[0]) return message.reply("Please enter the amount of messages to clear!");
  
         if(isNaN(args[0])) return message.reply("Please type a real number!");
