@@ -1,7 +1,7 @@
 module.exports = {
   name: 'ban',
   description: "this command bans a member!",
-  async execute( client, message, args , Discord){
+  async execute(client,message, args, cmd, Discord) { 
          const member = message.mentions.users.first();
            if(member){
           if(message.member.roles.cache.has('880362875674308648')){

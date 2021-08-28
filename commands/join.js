@@ -1,7 +1,7 @@
 module.exports = {
     name: 'join',
     description: "joins!",
-    execute(client, message, args, Discord){
+    async execute(client,message, args, cmd, Discord) { 
 
 const channel = client.channels.cache.get("880705489372053504");
 if (!channel) return console.error("The channel does not exist!");

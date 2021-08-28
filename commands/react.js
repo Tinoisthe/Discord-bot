@@ -2,7 +2,7 @@
     module.exports = {
         name: 'react',
         description: "Sets up a reaction role message!",
-        async execute(client,message, args, Discord) {
+        async execute(client,message, args, cmd, Discord) { 
             const channel = '873832687482322954';
             const ArchiveMember = message.guild.roles.cache.find(role => role.name === "Archive  Member");
             const SuperArchive = message.guild.roles.cache.find(role => role.name === "Super Archive");

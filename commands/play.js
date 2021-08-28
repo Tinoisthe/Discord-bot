@@ -8,7 +8,7 @@ module.exports = {
     aliases: ['skip', 'stop','leave'], 
     cooldown: 0,
     description: 'Advanced music bot',
-    async execute(client, message, args, cmd, Discord){
+    async execute(client,message, args, cmd, Discord) { 
 
 
 

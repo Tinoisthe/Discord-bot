@@ -1,7 +1,8 @@
+const { MessageEmbed } = require('discord.js');
 module.exports = {
-    name: 'command',
+    name: 'help',
     description: "Sets up a reaction role message!",
-    execute(client,message, args, Discord) { 
+   async execute(client,message, args, cmd, Discord) { 
 const newEmbed = new Discord.MessageEmbed()
 .setColor('#304281')
 .setTitle('Commands')

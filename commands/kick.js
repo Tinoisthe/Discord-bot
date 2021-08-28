@@ -1,7 +1,7 @@
 module.exports = {
  name: 'kick',
  description: "this command kicks a member!",
- execute(client, message, args, Discord){
+ async execute(client,message, args, cmd, Discord) { 
   if(member){
     if(message.member.roles.cache.has('880362875674308648')){
         const member = message.mentions.users.first();
