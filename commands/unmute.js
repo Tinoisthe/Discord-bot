@@ -2,6 +2,7 @@
 module.exports = {
     name: 'unmute',
     description: "this unmutes a member",
+    permission: ["ADMINISTRATOR","MUTE_MEMBERS"],
     async execute(client,message, args, cmd, Discord) { 
         if(message.member.roles.cache.has('880362875674308648')){
         const target = message.mentions.users.first();    

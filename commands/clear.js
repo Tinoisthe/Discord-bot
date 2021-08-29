@@ -1,8 +1,8 @@
 module.exports = {
     name: 'clear',
     description: "Clear messages!",
+  permissions: ["ADMINISTRATOR", "MANAGE_MESSAGES", "CONNECT"],
     async execute(client,message, args, cmd, Discord) { 
-    if(message.member.roles.cache.has('880362875674308648')){
         if (!args[0]) return message.reply("Please enter the amount of messages to clear!");
  
         if(isNaN(args[0])) return message.reply("Please type a real number!");
@@ -20,8 +20,4 @@ module.exports = {
   })
   .catch(/*Your Error handling if the Message isn't returned, sent, etc.*/);
  
-    });
-}else{ 
-    message.reply('You cant use that')
- 
-}}}
+})}}

@@ -2,8 +2,8 @@ const ms = require('ms');
 module.exports = {
     name: 'mute',
     description: "This mutes a member",
+    permission: ["ADMINISTRATOR","MUTE_MEMBERS"],
     async execute(client,message, args, cmd, Discord) { 
-        if(message.member.roles.cache.has('880362875674308648')){
         const target = message.mentions.users.first();
         if (target) {
  
@@ -28,12 +28,6 @@ module.exports = {
             }, ms(args[1]));
         } else {
             message.channel.send('Cant find that member!');
-
-            
         }
-    }else{
-        message.reply('You cant use that')
     }
-    
-}
 }
