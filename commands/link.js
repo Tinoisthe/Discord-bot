@@ -1,6 +1,7 @@
 module.exports = {
     name: 'link',
      description: "this is a link command!",
+     permission: ["ADMINISTRATOR"],
      async execute(client,message, args, cmd, Discord) { 
 
 

@@ -4,23 +4,11 @@ module.exports = {
   permission: ["ADMINISTRATOR","BAN_MEMBERS"],
   async execute(client,message, args, cmd, Discord) { 
          const member = message.mentions.users.first();
-           if(member){
-          if(message.member.roles.cache.has('880362875674308648')){
-            }else if (message.member.roles.cache.has('686625920861339685')){ 
-            }else if (message.member.roles.cache.has('795932192986365972')){ 
                console.log
               const memberTarger = message.guild.members.cache.get(member.id)
               memberTarger.ban();
               message.channel.send("User has been ban");
-            }else{ 
-              message.reply('You cant use that')
-              
-                     
-                    
-                          
-                 }
              }
  
   }
-}
 

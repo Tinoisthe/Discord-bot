@@ -3,9 +3,7 @@ module.exports = (Discord, client, message) => {
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).split(/ +/);
     const cmd = args.shift().toLowerCase();
-    if(cmd.length===0) return; //return if it's only prefix without command
-    let command = client.commands.get(cmd) //get command from command folder
-    || client.commands.get(client.aliases.get(cmd)); //get command if command's alias is used
+    const command = client.commands.get(cmd) || client.commands.find(a => a.aliases && a.aliases.includes(cmd));
     // In your command.js event file.
 const validPermissions = [
   "CREATE_INSTANT_INVITE",
@@ -41,7 +39,7 @@ const validPermissions = [
   "MANAGE_EMOJIS",
 ]
 
-if(command.permissions.length){
+if(command?.permission?.length){
   let invalidPerms = []
   for(const perm of command.permissions){
     if(!validPermissions.includes(perm)){
