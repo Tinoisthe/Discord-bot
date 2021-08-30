@@ -39,7 +39,7 @@ const validPermissions = [
   "MANAGE_EMOJIS",
 ]
 
-if(command?.permission?.length){
+if(command?.permissions?.length){
   let invalidPerms = []
   for(const perm of command?.permissions){
     if(!validPermissions.includes(perm)){
