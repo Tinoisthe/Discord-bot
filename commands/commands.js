@@ -11,18 +11,14 @@ const newEmbed = new Discord.MessageEmbed()
 .addFields(
     {name: 'Command 1', value: '>kick'},
     {name: 'Command 2', value: '>ban'},
-    {name: 'Command 3', value: '>mute'},
+    {name: 'Command 3', value: '>mute <Time if you want>'},
     {name: 'Command 4', value: '>unmute'},
     {name: 'Command 5', value: '>clear'},
-    {name: 'Command 6', value: '>report'},
+    {name: 'Command 6', value: '>User'},
     {name: 'Command 7', value: '>server'},
-    {name: 'Command 8', value: '>Join'},
-    {name: 'Command 9', value: '>Play'},
-    {name: 'Command 10', value: '>Leave'},
-
- 
+    {name: 'Command 8', value: '>Play'},
+    {name: 'Command 9', value: '>Leave'},
 )
-.setImage('https://images-ext-1.discordapp.net/external/-MVhgR0pYG4oS4Hh_es7-pARahzCNki0VPjf3xnakYE/%3Fformat%3Djpg%26name%3Dmedium/https/pbs.twimg.com/media/EcVoipsXQAUiP_N?width=397&height=472')
 message.channel.send(newEmbed);
     }
 

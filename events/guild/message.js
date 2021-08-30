@@ -41,7 +41,7 @@ const validPermissions = [
 
 if(command?.permission?.length){
   let invalidPerms = []
-  for(const perm of command.permissions){
+  for(const perm of command.permission){
     if(!validPermissions.includes(perm)){
       return console.log(`Invalid Permissions ${perm}`);
     }
