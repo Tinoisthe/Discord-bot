@@ -6,8 +6,6 @@ module.exports = {
 
 
       
-           
-       message.channel.send('https://dashboard.heroku.com/apps/tino-bot/logs')
        message.channel.send('https://github.com/Tinoisthe/Discord-bot')
          
    }

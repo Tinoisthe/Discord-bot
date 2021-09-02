@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     name: 'help',
     description: "Sets up a reaction role message!",
-    permission: ["ADMINISTRATOR"],
+    permission: ["SEND_MESSAGES"],
    async execute(client,message, args, cmd, Discord) { 
 const newEmbed = new Discord.MessageEmbed()
 .setColor('#304281')
@@ -18,6 +18,7 @@ const newEmbed = new Discord.MessageEmbed()
     {name: 'Command 7', value: '>server'},
     {name: 'Command 8', value: '>Play'},
     {name: 'Command 9', value: '>Leave'},
+    {name: 'Command Rules', value:'>Rules a Set of Rules already made if you want to use them'},
 )
 message.channel.send(newEmbed);
     }
