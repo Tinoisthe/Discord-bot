@@ -2,7 +2,7 @@
 module.exports = {
     name: 'unmute',
     description: "this unmutes a member",
-    permission: ["MUTE_MEMBERS"],
+    permissions: ["MUTE_MEMBERS"],
     async execute(client,message, args, cmd, Discord) { 
         const target = message.mentions.users.first();    
         if(target){
