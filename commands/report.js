@@ -2,7 +2,7 @@
 module.exports = {
     name: 'report',
      description: "this report someone!",
-     permission: ["SEND_MESSAGES"],
+     permissions: ["SEND_MESSAGES"],
      async execute(client,message, args, cmd, Discord) { 
         if (message.channel.type != 'dm') {
             message.delete();

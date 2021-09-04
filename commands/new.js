@@ -1,7 +1,7 @@
 module.exports = {
     name: 'new',
     description: "Sets up a reaction role message!",
-    permission: ["SEND_MESSAGES"],
+    permissions: ["SEND_MESSAGES"],
     async execute(client,message, args, cmd, Discord) { 
 const newEmbed = new Discord.MessageEmbed()
 .setColor('#304281')
