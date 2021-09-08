@@ -2,7 +2,7 @@ const ms = require('ms');
 module.exports = {
     name: 'mute',
     description: "This mutes a member",
-    permissions: ["MUTE_MEMBERS"],
+    permissions: ["MANAGE_ROLES"],
     async execute(client,message, args, cmd, Discord) { 
         const target = message.mentions.users.first();
         if (target) {
