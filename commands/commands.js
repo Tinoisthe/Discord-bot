@@ -18,6 +18,9 @@ const newEmbed = new Discord.MessageEmbed()
     {name: 'Command 7', value: '>server'},
     {name: 'Command 8', value: '>Play'},
     {name: 'Command 9', value: '>Leave'},
+    {name: 'Command 10', value: '>uptime'},
+    {name: 'Command 11', value: '>av'},
+    {name: 'Command 12', value: '>who'},
     {name: 'Command Rules', value:'>Rules a Set of Rules already made if you want to use them'},
 )
 message.channel.send(newEmbed);
