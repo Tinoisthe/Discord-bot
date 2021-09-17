@@ -59,3 +59,4 @@ if(command?.permissions?.length){
 
     if(command) command.execute(client, message, args, cmd, Discord);
 }
+
