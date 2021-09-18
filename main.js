@@ -8,18 +8,8 @@ const config = {
   
  
  };
- const actvs = [
-  "with code.",
-  "with the developers console",
-  "with the >help command.",
-  "with Music"
-];
-
-client.on('ready', () => {
-  client.user.setActivity(actvs[Math.floor(Math.random() * (actvs.length - 1) + 1)]);
-  setInterval(() => {
-      client.user.setActivity(actvs[Math.floor(Math.random() * (actvs.length - 1) + 0)]);
-  }, 20000);
+client.once('ready', () => {
+  client.user.setActivity('To Beat Music', { type: "LISTENING"});
 });
  client.on('guildMemberAdd', guildMember =>{
   let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === '880396361168732201');
