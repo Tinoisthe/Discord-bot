@@ -9,7 +9,7 @@ const config = {
  
  };
 client.once('ready', () => {
-  client.user.setActivity('To Beat Music', { type: "LISTENING"});
+  client.user.setActivity('To Code Files For Errors', { type: "LISTENING"});
 });
  client.on('guildMemberAdd', guildMember =>{
   let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === '880396361168732201');
