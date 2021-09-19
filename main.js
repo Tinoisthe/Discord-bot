@@ -9,17 +9,17 @@ const config = {
  
  };
  const actvs = [
-  " Code Files",
-  "the developers console",
-  "the >help command.",
-  " Music"
+  "with code.",
+  "with the developers console",
+  "with the >help command.",
+  "with Music"
 ];
 
 client.on('ready', () => {
-  client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "LISTENING"});
+  client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "PLAYING"});
   setInterval(() => {
-      client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "LISTENING"});
-  }, 1000*20);
+      client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "PLAYING"});
+  }, 1000*30);
 });
 
  client.on('guildMemberAdd', guildMember =>{
