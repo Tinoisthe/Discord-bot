@@ -16,10 +16,10 @@ const config = {
 ];
 
 client.on('ready', () => {
-  client.user.setActivity(actvs[Math.floor(Math.random() * (actvs.length - 1) + 1)]);
+  client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "PLAYING"});
   setInterval(() => {
-      client.user.setActivity(actvs[Math.floor(Math.random() * (actvs.length - 1) + 0)]);
-  }, 20000);
+      client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "PLAYING"});
+  }, 1000*20);
 });
 
  client.on('guildMemberAdd', guildMember =>{
