@@ -9,16 +9,16 @@ const config = {
  
  };
  const actvs = [
-  "with code.",
-  "with the developers console",
-  "with the >help command.",
-  "with Music"
+  " Code Files",
+  "the developers console",
+  "the >help command.",
+  " Music"
 ];
 
 client.on('ready', () => {
-  client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "PLAYING"});
+  client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "LISTENING"});
   setInterval(() => {
-      client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "PLAYING"});
+      client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "LISTENING"});
   }, 1000*20);
 });
 
