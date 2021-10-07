@@ -1,7 +1,7 @@
 module.exports = {
     name: 'rules',
     description: "Rules for Chat",
-    permissions: ["SEND_MESSAGES","MANAGE_MESSAGES"],
+    permissions: ["MANAGE_MESSAGES"],
     async execute(client,message, args, cmd, Discord) { 
 const newEmbed = new Discord.MessageEmbed()
 .setColor('#304281')

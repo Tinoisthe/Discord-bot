@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 module.exports = {
-    name: 'who',
+    name: 'whois',
     aliases: ["userinfo", "ui"],
     category: 'general',
     description: 'To get user info',
