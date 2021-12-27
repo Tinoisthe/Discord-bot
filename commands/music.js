@@ -11,7 +11,7 @@ const newEmbed = new Discord.MessageEmbed()
 .addFields(
     {name: 'Command 1', value: '>Play'},
     {name: 'Command 2', value: '>Leave'},
-    {name: 'Command 3', value: 'Comming Soon!!'},
+    {name: 'Command 3', value: '>skip'},
 )
 message.channel.send(newEmbed);
     }

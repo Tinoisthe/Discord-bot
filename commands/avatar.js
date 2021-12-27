@@ -6,7 +6,7 @@ module.exports = {
     description: 'To get avatar',
     permissions: ["SEND_MESSAGES"],
     usage: '[user]',
-    async execute(client,message, args, cmd, Discord) {
+    async execute(client, message, args, cmd, Discord, profileData) {
         var member = message.mentions.members.first() || await message.guild.members.fetch(args[0])
         if(!member.user){
             member = message.member
