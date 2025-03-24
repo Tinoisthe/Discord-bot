@@ -1,115 +1,168 @@
 const Discord = require('discord.js');
-const path = require('path')
-const fs = require('fs')
-const client = new Discord.Client({ partials: ['MESSAGE','CHANNEL','REACTION']});
-const { env, send, off } = require('process');
-const ytdl = require("ytdl-core");
-const mongoose = require("mongoose")
+const { Client, GatewayIntentBits, Collection, Partials } = Discord;
+const path = require('path');
+const fs = require('fs');
 require('dotenv-flow').config();
-const config = { 
+
+// ✅ Bot prefix
+const prefix = '>';
+
+// ✅ Initialize bot client with required intents
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.DirectMessages,
+  ],
+  partials: [Partials.Message, Partials.Channel, Partials.Reaction],
+});
+
+// ✅ Load bot token from environment variables
+const config = {
   token: process.env.TOKEN,
-  
- };
- const actvs = [
+};
+
+// ✅ Bot activity messages
+const actvs = [
   "with code.",
-  "with the developers console",
+  "with the developers console.",
   "with the >help command.",
-  "with Music"
+  "with Music."
 ];
 
- client.on("ready",  () => {
-  client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "PLAYING"});
-  setInterval(() => {
-      client.user.setActivity({name: actvs[Math.floor(Math.random() * actvs.length)], type: "PLAYING"});
-  }, 1000*30);
+// ✅ Event: When bot is ready
+client.on('ready', () => {
+  console.log(`✅ Logged in as ${client.user.tag}`);
 
-});
-client.on('messageDelete', async message => {
-	// Ignore direct messages
-	if (!message.guild) return;
-	const fetchedLogs = await message.guild.fetchAuditLogs({
-		limit: 1,
-		type: 'MESSAGE_DELETE',
-	});
-	// Since there's only 1 audit log entry in this collection, grab the first one
-	const deletionLog = fetchedLogs.entries.first();
+  const setRandomActivity = () => {
+    const activity = actvs[Math.floor(Math.random() * actvs.length)];
+    client.user.setActivity({ name: activity, type: "PLAYING" });
+  };
 
-	// Perform a coherence check to make sure that there's *something*
-	if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
-
-	// Now grab the user object of the person who deleted the message
-	// Also grab the target of this action to double-check things
-	const { executor, target } = deletionLog;
-
-	// Update the output with a bit more information
-	// Also run a check to make sure that the log returned was for the same author's message
-	if (target.id === message.author.id) {
-		console.log(`A message by ${message.author.tag} was deleted by ${executor.tag}.`);
-	} else {
-		console.log(`A message by ${message.author.tag} was deleted, but we don't know by who.`);
-	}
-});
-client.on('guildMemberRemove', async member => {
-	const fetchedLogs = await member.guild.fetchAuditLogs({
-		limit: 1,
-		type: 'MEMBER_KICK',
-	});
-
-	  
-	// Since there's only 1 audit log entry in this collection, grab the first one
-	const kickLog = fetchedLogs.entries.first();
-
-	// Perform a coherence check to make sure that there's *something*
-	if (!kickLog) return console.log(`${member.user.tag} left the guild, most likely of their own will.`);
-
-	// Now grab the user object of the person who kicked the member
-	// Also grab the target of this action to double-check things
-	const { executor, target } = kickLog;
-
-	// Update the output with a bit more information
-	// Also run a check to make sure that the log returned was for the same kicked member
-	if (target.id === member.id) {
-		console.log(`${member.user.tag} left the guild; kicked by ${executor.tag}?`);
-	} else {
-		console.log(`${member.user.tag} left the guild, audit log fetch was inconclusive.`);
-	}
-});
-client.on('guildBanAdd', async ban => {
-	const fetchedLogs = await ban.guild.fetchAuditLogs({
-		limit: 1,
-		type: 'MEMBER_BAN_ADD',
-	});
-	// Since there's only 1 audit log entry in this collection, grab the first one
-	const banLog = fetchedLogs.entries.first();
-
-	// Perform a coherence check to make sure that there's *something*
-	if (!banLog) return console.log(`${ban.user.tag} was banned from ${ban.guild.name} but no audit log could be found.`);
-
-	// Now grab the user object of the person who banned the member
-	// Also grab the target of this action to double-check things
-	const { executor, target } = banLog;
-
-	// Update the output with a bit more information
-	// Also run a check to make sure that the log returned was for the same banned member
-	if (target.id === ban.user.id) {
-		console.log(`${ban.user.tag} got hit with the swift hammer of justice in the guild ${ban.guild.name}, wielded by the mighty ${executor.tag}`);
-	} else {
-		console.log(`${ban.user.tag} got hit with the swift hammer of justice in the guild ${ban.guild.name}, audit log fetch was inconclusive.`);
-	}
-});
-  client.commands = new Discord.Collection();
-  client.events = new Discord.Collection();
-['command_handler','event_handler'].forEach(handler => {
-  require(`./handlers/${handler}`)(client, Discord)
+  setRandomActivity();
+  setInterval(setRandomActivity, 1000 * 30); // Change activity every 30 seconds
 });
 
-mongoose.connect(process.env.MONGODB_SRV,{
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-})
-.then(()=>{
-	console.log("connected to database");
-}).catch((err) =>{
-	console.log(err);
-})
+// ✅ Load commands dynamically from "commands" folder
+client.commands = new Collection();
+const commandsPath = path.join(__dirname, 'commands');
+
+if (!fs.existsSync(commandsPath)) {
+  console.error(`❌ ERROR: Commands folder does not exist at: ${commandsPath}`);
+  process.exit(1);
+}
+
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+  try {
+    console.log(`🔹 Loading command: ${file}`);
+    const command = require(path.join(commandsPath, file));
+    if (!command.name) {
+      console.warn(`⚠️ Skipping ${file}: Missing "name" property.`);
+      continue;
+    }
+    client.commands.set(command.name, command);
+    console.log(`✅ Loaded command: ${command.name}`);
+  } catch (error) {
+    console.error(`❌ Error loading command ${file}:`, error);
+  }
+}
+
+// ✅ Load event handlers
+['command_handler', 'event_handler'].forEach(handler => {
+  try {
+    require(`./handlers/${handler}`)(client, Discord, prefix);
+    console.log(`✅ Loaded handler: ${handler}`);
+  } catch (error) {
+    console.error(`❌ Failed to load handler: ${handler}`, error);
+  }
+});
+
+// ✅ Event: Assign role to new members
+client.on('guildMemberAdd', async (member) => {
+  const ROLE_ID = '1351395622653136909'; // Change to your role ID
+  const role = member.guild.roles.cache.get(ROLE_ID);
+  if (!role) {
+    console.error(`❌ Role with ID ${ROLE_ID} not found.`);
+    return;
+  }
+  try {
+    await member.roles.add(role);
+    console.log(`✅ Assigned role ${role.name} to ${member.user.tag}`);
+  } catch (error) {
+    console.error(`❌ Failed to assign role:`, error);
+  }
+});
+
+// ✅ Define restricted channels
+const TARGET_CHANNELS = [
+  '1351399908254679061', 
+  '1351396038610518047',
+];
+const LINK_CHANNEL_ID = '1351397888009437266';
+const REPORT_LINKS_CHANNEL = '<#1351396038610518047>'; 
+
+// ✅ Event: Message handling
+client.on('messageCreate', async (message) => {
+  if (message.author.bot) return;
+
+  const linkRegex = /(https?:\/\/[^\s]+)/gi; 
+
+  // 🔹 Delete links in the restricted channel
+  if (message.channel.id === LINK_CHANNEL_ID && linkRegex.test(message.content)) {
+    try {
+      await message.delete();
+      const warningMessage = await message.channel.send(
+        `${message.author}, links are not allowed here. Please post them in ${REPORT_LINKS_CHANNEL}.`
+      );
+      setTimeout(() => warningMessage.delete().catch(console.error), 5000);
+    } catch (error) {
+      console.error(`❌ Failed to delete link message:`, error);
+    }
+    return;
+  }
+
+  // 🔹 Handle commands
+  if (message.content.startsWith(prefix)) {
+    const args = message.content.slice(prefix.length).trim().split(/\s+/);
+    const commandName = args.shift().toLowerCase();
+    const command = client.commands.get(commandName);
+
+    if (command) {
+      try {
+        await command.execute(client, message, args); // ✅ Corrected: Pass `client`
+        setTimeout(() => message.delete().catch(console.error), 5000);
+      } catch (error) {
+        console.error(`❌ Error executing ${commandName}:`, error);
+        const errorReply = await message.reply('There was an error executing that command.');
+        setTimeout(() => errorReply.delete().catch(console.error), 5000);
+      }
+      return;
+    }
+  }
+
+  // 🔹 Delete unauthorized messages in target channels
+  if (TARGET_CHANNELS.includes(message.channel.id)) {
+    try {
+      await message.delete();
+      const warningMessage = await message.channel.send(
+        `${message.author}, Report was sent `
+      );
+      setTimeout(() => warningMessage.delete().catch(console.error), 5000);
+    } catch (error) {
+      console.error(`❌ Failed to delete unauthorized message:`, error);
+    }
+  }
+});
+
+// ✅ Log in to Discord
 client.login(config.token)
+  .then(() => {
+    console.log('✅ Bot is successfully logged in!');
+  })
+  .catch((err) => {
+    console.error("❌ Failed to log in:", err);
+  });
