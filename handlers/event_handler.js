@@ -1,13 +1,16 @@
-const fs  = require('fs');
+const fs = require('fs');
 
-module.exports = (Client, Discord) => {
-const load_dir = (dirs) => {
-    const event_files = fs.readdirSync(`./events/${dirs}`).filter(File => File.endsWith('.js'));
-    for(const file of event_files){
-        const event = require(`../events/${dirs}/${file}`);
-        const event_name = file.split('.')[0];
-        Client.on(event_name, event.bind(null, Discord, Client))
+module.exports = (client) => {
+  const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
+  for (const file of eventFiles) {
+    const event = require(`../events/${file}`);
+
+    // If the event file is "messageCreate.js"
+    if (file === 'messageCreate.js') {
+      client.on('messageCreate', (message) => event(client, message)); // ✅ FIXED
+    } else {
+      client.on(file.split('.')[0], event.bind(null, client));
     }
-}
-['client', 'guild'].forEach(e => load_dir(e));
-}
+  }
+};

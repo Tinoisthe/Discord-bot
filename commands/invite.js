@@ -1,16 +1,27 @@
-
-const Discord = require('discord.js')
 module.exports = {
-    name: 'invitebot',
-    aliases: ["invite"],
-    description: 'Invite link to add the bot in your server',
-    category:'info',
-    async execute(client,message, args, cmd, Discord) { 
-        const embed = new Discord.MessageEmbed()
-        .setColor('#304281')
-            .setTitle(`${client.user.username}'s invite link`)
-            .addField('Developer Team: ','<@412011486953865227>')
-            .setDescription(`\[Press HERE For Bot Link\]\(https://discord.com/oauth2/authorize?client_id=793734987513856020&permissions=278534417654&scope=bot)`)
-        message.channel.send(embed);       
+  name: 'invite',
+  description: 'Sends the bot invite link in DMs.',
+  async execute(client, message, args) {
+    const INVITE_LINK = 'https://discord.gg/fg2VV6BqXy'; // 🔹 Replace with your actual invite link
+
+    try {
+      await message.author.send(`Here's your invite link: ${INVITE_LINK}`);
+      console.log(`📩 Sent invite link to ${message.author.tag}`);
+
+      const botReply = await message.reply('Check your DMs for the invite link!');
+      setTimeout(() => botReply.delete().catch(console.error), 5000);
+    } catch (error) {
+      console.error('❌ Failed to send DM:', error);
+
+      if (error.code === 50007) { // Cannot send messages to this user
+        const botReply = await message.reply("I couldn't send you a DM. Please enable your DMs and try again.");
+        setTimeout(() => botReply.delete().catch(console.error), 5000);
+      }
     }
-}
+
+    // 🔹 Delete the command message after 5 seconds
+    setTimeout(() => {
+      if (message.deletable) message.delete().catch(console.error);
+    }, 5000);
+  },
+};
