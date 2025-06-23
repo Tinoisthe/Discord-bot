@@ -1,168 +1,136 @@
+// ✅ Import Discord.js and necessary classes
 const Discord = require('discord.js');
 const { Client, GatewayIntentBits, Collection, Partials } = Discord;
+
+// ✅ Node.js built-in modules for path handling and file system operations
 const path = require('path');
 const fs = require('fs');
+
+// ✅ Load environment variables from .env/.env.local/etc.
 require('dotenv-flow').config();
 
-// ✅ Bot prefix
+// ✅ Import the MySQL connection and error logging function from a custom handler
+const { connection, logErrorToDatabase } = require('./handlers/logger');
+
+// ✅ Define a simple command prefix for the bot
 const prefix = '>';
 
-// ✅ Initialize bot client with required intents
+// ✅ Initialize a new Discord Client instance with required intents and partials
 const client = new Client({
   intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildMessageReactions,
-    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.Guilds,                  // Enables bot to access guild-level events
+    GatewayIntentBits.GuildMessages,           // Enables reading messages in text channels
+    GatewayIntentBits.MessageContent,          // Enables access to the actual message content
+    GatewayIntentBits.GuildMembers,            // Enables member join/leave/update events
+    GatewayIntentBits.GuildMessageReactions,   // Enables reaction add/remove events
+    GatewayIntentBits.DirectMessages,          // Enables receiving DMs (optional, depends on your use case)
   ],
-  partials: [Partials.Message, Partials.Channel, Partials.Reaction],
+  partials: [Partials.Message, Partials.Channel, Partials.Reaction], // Required for DM or uncached events to work correctly
 });
 
-// ✅ Load bot token from environment variables
-const config = {
-  token: process.env.TOKEN,
-};
-
-// ✅ Bot activity messages
-const actvs = [
-  "with code.",
-  "with the developers console.",
-  "with the >help command.",
-  "with Music."
-];
-
-// ✅ Event: When bot is ready
-client.on('ready', () => {
-  console.log(`✅ Logged in as ${client.user.tag}`);
-
-  const setRandomActivity = () => {
-    const activity = actvs[Math.floor(Math.random() * actvs.length)];
-    client.user.setActivity({ name: activity, type: "PLAYING" });
-  };
-
-  setRandomActivity();
-  setInterval(setRandomActivity, 1000 * 30); // Change activity every 30 seconds
-});
-
-// ✅ Load commands dynamically from "commands" folder
+// ✅ Initialize a Collection to store all commands
 client.commands = new Collection();
+
+// ✅ Path to the command folder
 const commandsPath = path.join(__dirname, 'commands');
 
+// ✅ Ensure commands directory exists before trying to load files
 if (!fs.existsSync(commandsPath)) {
   console.error(`❌ ERROR: Commands folder does not exist at: ${commandsPath}`);
-  process.exit(1);
+  process.exit(1); // Gracefully stop the bot if folder is missing
 }
 
+// ✅ Dynamically load all command files ending in `.js`
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
   try {
     console.log(`🔹 Loading command: ${file}`);
     const command = require(path.join(commandsPath, file));
+
+    // ✅ Ensure the command file exports a "name" property
     if (!command.name) {
       console.warn(`⚠️ Skipping ${file}: Missing "name" property.`);
       continue;
     }
+
+    // ✅ Store the command in the bot's command collection
     client.commands.set(command.name, command);
     console.log(`✅ Loaded command: ${command.name}`);
   } catch (error) {
     console.error(`❌ Error loading command ${file}:`, error);
+    logErrorToDatabase(error, 'commandLoad'); // Log any loading errors
   }
 }
 
-// ✅ Load event handlers
-['command_handler', 'event_handler'].forEach(handler => {
-  try {
-    require(`./handlers/${handler}`)(client, Discord, prefix);
-    console.log(`✅ Loaded handler: ${handler}`);
-  } catch (error) {
-    console.error(`❌ Failed to load handler: ${handler}`, error);
-  }
-});
+// ✅ Register message handler module (e.g. command processing, filtering, etc.)
+require('./handlers/messageHandler')(client, connection, logErrorToDatabase, prefix);
 
-// ✅ Event: Assign role to new members
-client.on('guildMemberAdd', async (member) => {
-  const ROLE_ID = '1351395622653136909'; // Change to your role ID
-  const role = member.guild.roles.cache.get(ROLE_ID);
-  if (!role) {
-    console.error(`❌ Role with ID ${ROLE_ID} not found.`);
-    return;
-  }
-  try {
-    await member.roles.add(role);
-    console.log(`✅ Assigned role ${role.name} to ${member.user.tag}`);
-  } catch (error) {
-    console.error(`❌ Failed to assign role:`, error);
-  }
-});
+// ✅ Register auto-role module to give roles to new users
+require('./handlers/autoRole')(client, logErrorToDatabase);
 
-// ✅ Define restricted channels
-const TARGET_CHANNELS = [
-  '1351399908254679061', 
-  '1351396038610518047',
-];
-const LINK_CHANNEL_ID = '1351397888009437266';
-const REPORT_LINKS_CHANNEL = '<#1351396038610518047>'; 
+// ✅ Register a message cleanup module (e.g. auto-deleting old messages)
+require('./handlers/messageCleanup')(client, logErrorToDatabase);
 
-// ✅ Event: Message handling
-client.on('messageCreate', async (message) => {
-  if (message.author.bot) return;
-
-  const linkRegex = /(https?:\/\/[^\s]+)/gi; 
-
-  // 🔹 Delete links in the restricted channel
-  if (message.channel.id === LINK_CHANNEL_ID && linkRegex.test(message.content)) {
-    try {
-      await message.delete();
-      const warningMessage = await message.channel.send(
-        `${message.author}, links are not allowed here. Please post them in ${REPORT_LINKS_CHANNEL}.`
-      );
-      setTimeout(() => warningMessage.delete().catch(console.error), 5000);
-    } catch (error) {
-      console.error(`❌ Failed to delete link message:`, error);
-    }
-    return;
-  }
-
-  // 🔹 Handle commands
-  if (message.content.startsWith(prefix)) {
-    const args = message.content.slice(prefix.length).trim().split(/\s+/);
-    const commandName = args.shift().toLowerCase();
-    const command = client.commands.get(commandName);
-
-    if (command) {
-      try {
-        await command.execute(client, message, args); // ✅ Corrected: Pass `client`
-        setTimeout(() => message.delete().catch(console.error), 5000);
-      } catch (error) {
-        console.error(`❌ Error executing ${commandName}:`, error);
-        const errorReply = await message.reply('There was an error executing that command.');
-        setTimeout(() => errorReply.delete().catch(console.error), 5000);
+// ✅ Track deleted messages and mark them in the database
+client.on('messageDelete', async (message) => {
+  // Update message record to reflect deletion
+  connection.query(
+    'UPDATE messages SET deleted_at = NOW() WHERE message_id = ?',
+    [message.id],
+    (err, results) => {
+      if (err) {
+        console.error('Error updating deleted message timestamp:', err);
+        logErrorToDatabase(err, 'messageDelete');
+        return;
       }
-      return;
+      console.log('✅ Message marked as deleted:', results);
     }
-  }
-
-  // 🔹 Delete unauthorized messages in target channels
-  if (TARGET_CHANNELS.includes(message.channel.id)) {
-    try {
-      await message.delete();
-      const warningMessage = await message.channel.send(
-        `${message.author}, Report was sent `
-      );
-      setTimeout(() => warningMessage.delete().catch(console.error), 5000);
-    } catch (error) {
-      console.error(`❌ Failed to delete unauthorized message:`, error);
-    }
-  }
+  );
 });
 
-// ✅ Log in to Discord
-client.login(config.token)
+// ✅ Listen for low-level client errors and log them
+client.on('error', (error) => {
+  console.error('❌ Discord Client Error:', error);
+  logErrorToDatabase(error, 'clientError');
+});
+
+client.on('warn', (info) => {
+  console.warn('⚠️ Discord Client Warning:', info);
+  logErrorToDatabase(info, 'clientWarning');
+});
+
+client.on('shardError', (error) => {
+  console.error('❌ Shard Error:', error);
+  logErrorToDatabase(error, 'shardError');
+});
+
+// ✅ Global process error handlers to catch uncaught or unhandled issues
+process.on('unhandledRejection', (reason) => {
+  console.error('❌ Unhandled Rejection:', reason);
+  logErrorToDatabase(reason, 'unhandledRejection');
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('❌ Uncaught Exception:', error);
+  logErrorToDatabase(error, 'uncaughtException');
+});
+
+// ✅ Optional: Clean shutdown - close DB connection properly
+process.on('SIGINT', () => {
+  console.log('🛑 Gracefully shutting down...');
+  connection.end(err => {
+    if (err) console.error('❌ Error closing DB connection:', err);
+    else console.log('✅ DB connection closed.');
+    process.exit();
+  });
+});
+
+// ✅ Finally, log in to Discord using the bot token
+client.login(process.env.TOKEN)
   .then(() => {
     console.log('✅ Bot is successfully logged in!');
   })
   .catch((err) => {
     console.error("❌ Failed to log in:", err);
+    logErrorToDatabase(err, 'loginError');
   });
