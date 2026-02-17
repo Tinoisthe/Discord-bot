@@ -6,9 +6,9 @@ const mysql = require('mysql2');
 
 // Setup connection need to move to the DB 
 const connection = mysql.createConnection({
-    host: '23.150.161.140',
-    user: 'neonnext2_Tino',
-    password: 'Sj@593707s',
+    host: '',
+    user: '',
+    password: '',
     database: 'neonnext2_logs',
     charset: 'utf8mb4'
 });
@@ -174,3 +174,4 @@ module.exports = {
     logRoleChange,
     logVoiceStateUpdate,
 };
+
